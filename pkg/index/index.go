@@ -12,6 +12,7 @@ var (
 	generators map[string]generate.Generator = map[string]generate.Generator{
 		"blank":    &simple.BlankGenerator{},
 		"gradient": &simple.GradientGenerator{},
+		"ramp":     simple.RampGenerator{},
 	}
 )
 
