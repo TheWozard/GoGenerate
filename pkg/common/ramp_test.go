@@ -56,12 +56,12 @@ func TestColorRamp(t *testing.T) {
 		{
 			name: "basic tail",
 			ramp: basic, factor: 0.9,
-			output: color.RGBA{R: 0xff, G: 0xff, B: 0xff, A: 0xff},
+			output: color.White,
 		},
 		{
 			name: "basic end",
 			ramp: basic, factor: 1,
-			output: color.RGBA{R: 0xff, G: 0xff, B: 0xff, A: 0xff},
+			output: color.White,
 		},
 	}
 	for i, test := range tests {

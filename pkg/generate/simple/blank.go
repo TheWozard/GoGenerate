@@ -5,14 +5,14 @@ import (
 	"image/color"
 
 	"github.com/TheWozard/GoGenerate/pkg/common"
-	"github.com/TheWozard/GoGenerate/pkg/generate"
+	"github.com/TheWozard/GoGenerate/pkg/generate/params"
 )
 
 type BlankGenerator struct {
 	Color color.Color
 }
 
-func (bg *BlankGenerator) Gen(params *generate.GenerationParams) (image.Image, error) {
+func (bg *BlankGenerator) Gen(params *params.GenerationParams) (image.Image, error) {
 	img := params.Image()
 	background := bg.color(params)
 
@@ -25,7 +25,7 @@ func (bg *BlankGenerator) Gen(params *generate.GenerationParams) (image.Image, e
 	return img, nil
 }
 
-func (bg *BlankGenerator) color(params *generate.GenerationParams) color.Color {
+func (bg *BlankGenerator) color(params *params.GenerationParams) color.Color {
 	if bg.Color == nil {
 		bg.Color = common.RandomColor(params.Rand())
 	}

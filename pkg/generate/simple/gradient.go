@@ -5,7 +5,7 @@ import (
 	"image/color"
 
 	"github.com/TheWozard/GoGenerate/pkg/common"
-	"github.com/TheWozard/GoGenerate/pkg/generate"
+	"github.com/TheWozard/GoGenerate/pkg/generate/params"
 )
 
 type GradientGenerator struct {
@@ -15,7 +15,7 @@ type GradientGenerator struct {
 	Func common.GradientFunction
 }
 
-func (gg *GradientGenerator) Gen(params *generate.GenerationParams) (image.Image, error) {
+func (gg *GradientGenerator) Gen(params *params.GenerationParams) (image.Image, error) {
 	img := params.Image()
 	from := gg.from(params)
 	to := gg.to(params)
@@ -31,21 +31,21 @@ func (gg *GradientGenerator) Gen(params *generate.GenerationParams) (image.Image
 	return img, nil
 }
 
-func (gg *GradientGenerator) from(params *generate.GenerationParams) color.Color {
+func (gg *GradientGenerator) from(params *params.GenerationParams) color.Color {
 	if gg.From == nil {
 		gg.From = common.RandomColor(params.Rand())
 	}
 	return gg.From
 }
 
-func (gg *GradientGenerator) to(params *generate.GenerationParams) color.Color {
+func (gg *GradientGenerator) to(params *params.GenerationParams) color.Color {
 	if gg.To == nil {
 		gg.To = common.RandomColor(params.Rand())
 	}
 	return gg.To
 }
 
-func (gg *GradientGenerator) function(params *generate.GenerationParams) common.GradientFunction {
+func (gg *GradientGenerator) function(params *params.GenerationParams) common.GradientFunction {
 	if gg.Func == nil {
 		gg.Func = common.LinearGradient
 	}

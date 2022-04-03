@@ -19,5 +19,8 @@ vendor/
 # Go workspace file
 go.work
 
+# vscode
+.vscode
+
 # generate command default output file
 out.png
