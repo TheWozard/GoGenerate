@@ -1,29 +1,35 @@
 package common
 
-import "image/color"
+import (
+	"image/color"
+	"math/rand"
 
-func NewColorIndex(items int, ramp ColorRamp) *ColorIndex {
+	"github.com/TheWozard/GoGenerate/pkg/generate/params"
+)
+
+func NewColorIndex(items int, ramp ColorRamp, param params.GenerationParams) *ColorIndex {
 	return &ColorIndex{
-		factor: 0,
-		step:   1.0 / float64(items),
-		ramp:   ramp,
-		cache:  map[interface{}]color.Color{},
+		count: items,
+		rand:  param.Rand(),
+		step:  1.0 / float64(items),
+		ramp:  ramp,
+		cache: map[interface{}]color.Color{},
 	}
 }
 
 type ColorIndex struct {
-	factor float64
-	step   float64
-	ramp   ColorRamp
-	cache  map[interface{}]color.Color
+	count int
+	rand  *rand.Rand
+	step  float64
+	ramp  ColorRamp
+	cache map[interface{}]color.Color
 }
 
 func (ci *ColorIndex) GetColor(index interface{}) color.Color {
 	color, ok := ci.cache[index]
 	if !ok {
-		color = ci.ramp.ColorAt(ci.factor)
+		color = ci.ramp.ColorAt(float64(rand.Intn(ci.count)) * ci.step)
 		ci.cache[index] = color
-		ci.factor = (ci.factor + ci.step)
 	}
 	return color
 }

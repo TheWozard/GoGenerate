@@ -15,7 +15,7 @@ type GradientGenerator struct {
 	Func common.GradientFunction
 }
 
-func (gg *GradientGenerator) Gen(params *params.GenerationParams) (image.Image, error) {
+func (gg *GradientGenerator) Gen(params *params.GenerationParams) (*image.RGBA, error) {
 	img := params.Image()
 	from := gg.from(params)
 	to := gg.to(params)

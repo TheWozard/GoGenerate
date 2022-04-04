@@ -12,7 +12,7 @@ type BlankGenerator struct {
 	Color color.Color
 }
 
-func (bg *BlankGenerator) Gen(params *params.GenerationParams) (image.Image, error) {
+func (bg *BlankGenerator) Gen(params *params.GenerationParams) (*image.RGBA, error) {
 	img := params.Image()
 	background := bg.color(params)
 

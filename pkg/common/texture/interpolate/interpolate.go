@@ -42,5 +42,5 @@ func Exponential(a0, a1, w float64) float64 {
 	if w > 1.0 {
 		return a1
 	}
-	return math.Pow(w, math.E) + a0
+	return math.Pow((a1-a0), 1/w) + a0
 }

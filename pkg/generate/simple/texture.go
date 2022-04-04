@@ -13,7 +13,7 @@ type TextureGenerator struct {
 	Factory texture.TextureFactory
 }
 
-func (tg TextureGenerator) Gen(params *params.GenerationParams) (image.Image, error) {
+func (tg TextureGenerator) Gen(params *params.GenerationParams) (*image.RGBA, error) {
 	img := params.Image()
 	texture := tg.Factory.Texture(params)
 

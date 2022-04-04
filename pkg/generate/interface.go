@@ -8,5 +8,5 @@ import (
 
 // Generator interface for a standard generator
 type Generator interface {
-	Gen(params *params.GenerationParams) (image.Image, error)
+	Gen(params *params.GenerationParams) (*image.RGBA, error)
 }

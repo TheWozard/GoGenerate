@@ -11,19 +11,15 @@ type GenerationParams struct {
 	Height int
 	Width  int
 
-	generator *rand.Rand
-	image     *image.RGBA
+	image *image.RGBA
 }
 
 func (gp *GenerationParams) Rand() *rand.Rand {
-	if gp.generator == nil {
-		seed := int64(0)
-		for _, b := range []byte(gp.Seed) {
-			seed = seed + int64(b)
-		}
-		gp.generator = rand.New(rand.NewSource(seed))
+	seed := int64(0)
+	for _, b := range []byte(gp.Seed) {
+		seed = seed + int64(b)
 	}
-	return gp.generator
+	return rand.New(rand.NewSource(seed))
 }
 
 func (gp *GenerationParams) Image() *image.RGBA {

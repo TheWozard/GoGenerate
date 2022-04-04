@@ -10,3 +10,12 @@ type FactorTexture interface {
 type TextureFactory interface {
 	Texture(params *params.GenerationParams) FactorTexture
 }
+
+type ModifyTexture struct {
+	F       func(float64) float64
+	Wrapped FactorTexture
+}
+
+func (mt ModifyTexture) FactorAt(x, y int) float64 {
+	return mt.F(mt.Wrapped.FactorAt(x, y))
+}

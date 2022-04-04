@@ -12,7 +12,7 @@ type RampGenerator struct {
 	Func common.GradientFunction
 }
 
-func (rg RampGenerator) Gen(params *params.GenerationParams) (image.Image, error) {
+func (rg RampGenerator) Gen(params *params.GenerationParams) (*image.RGBA, error) {
 	img := params.Image()
 	f := rg.function(params)
 	ramp := rg.ramp(params)

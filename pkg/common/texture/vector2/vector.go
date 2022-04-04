@@ -38,3 +38,7 @@ func (v Vector) Add(dv Vector) Vector {
 func (v Vector) DivF(factor float64) Vector {
 	return New(v.X/factor, v.Y/factor)
 }
+
+func (v Vector) Round() (int, int) {
+	return int(math.Floor(v.X)), int(math.Floor(v.Y))
+}
