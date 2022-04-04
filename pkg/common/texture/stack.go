@@ -17,6 +17,7 @@ func NewStack(factories ...TextureStackFactoryInfo) TextureFactory {
 
 type TextureStackFactoryInfo struct {
 	Factory TextureFactory
+	Texture FactorTexture
 	Factor  int
 }
 
@@ -28,9 +29,16 @@ type textureStackFactory struct {
 func (sf textureStackFactory) Texture(params *params.GenerationParams) FactorTexture {
 	textures := make([]textureStackInfo, len(sf.factories))
 	for i, factory := range sf.factories {
-		textures[i] = textureStackInfo{
-			factor:  float64(factory.Factor),
-			texture: factory.Factory.Texture(params),
+		if factory.Texture != nil {
+			textures[i] = textureStackInfo{
+				factor:  float64(factory.Factor),
+				texture: factory.Texture,
+			}
+		} else {
+			textures[i] = textureStackInfo{
+				factor:  float64(factory.Factor),
+				texture: factory.Factory.Texture(params),
+			}
 		}
 	}
 	return textureStack{

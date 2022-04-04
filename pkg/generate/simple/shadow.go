@@ -19,17 +19,20 @@ func (sg ShadowGenerator) Gen(params *params.GenerationParams) (*image.RGBA, err
 	img := params.Image()
 
 	width, height := img.Bounds().Dx(), img.Bounds().Dy()
-	for x := 0; x < width; x++ {
-		for y := 0; y < height; y++ {
+	for x := -1; x < width+1; x++ {
+		for y := -1; y < height+1; y++ {
 			amount := sg.Texture.FactorAt(x, y)
 			location := vector2.New(float64(x), float64(y))
 			for amount > 0 {
-				location = location.Add(sg.Direction)
+				location = location.NextInt(sg.Direction)
 				cx, cy := location.Round()
 				if cx >= 0 && cx < width && cy >= 0 && cy < height {
-					amount = amount - sg.Height - sg.Texture.FactorAt(cx, cy)
-					if amount > 0 {
-						img.Set(cx, cy, color.Black)
+					amount = amount - sg.Height
+					local := sg.Texture.FactorAt(cx, cy)
+					if amount > local {
+						img.Set(cx, cy, color.RGBA{0x00, 0x00, 0x00, 0x33})
+					} else {
+						break
 					}
 				} else {
 					break

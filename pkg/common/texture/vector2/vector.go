@@ -42,3 +42,12 @@ func (v Vector) DivF(factor float64) Vector {
 func (v Vector) Round() (int, int) {
 	return int(math.Floor(v.X)), int(math.Floor(v.Y))
 }
+
+func (v Vector) NextInt(dv Vector) Vector {
+	xm := 1 / dv.X
+	ym := 1 / dv.Y
+
+	m := math.Min(xm, ym)
+
+	return New(math.Floor(v.X+(dv.X*m)), math.Floor(v.Y+(dv.Y*m)))
+}
